@@ -30,6 +30,7 @@ export const login = async (email: string, password: string) => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({ email, password }),
     });
 
@@ -44,5 +45,28 @@ export const login = async (email: string, password: string) => {
     error = error;
   } finally {
     return { user, error };
+  }
+};
+
+export const logout = async () => {
+  let error: any = null;
+  let data = null;
+
+  try {
+    const response = await fetch(`${BACKEND_URL}/auth/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      throw new Error("Logout failed");
+    }
+
+    data = await response.json();
+  } catch (error) {
+    console.error("Error logging out:", error);
+    error = error;
+  } finally {
+    return { data, error };
   }
 };
