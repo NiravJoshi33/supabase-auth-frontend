@@ -1,6 +1,8 @@
 import { BACKEND_URL } from "./env-vars";
 
 export const signUp = async (email: string, password: string) => {
+  let data: any = null;
+  let error = null;
   try {
     const response = await fetch(`${BACKEND_URL}/auth/signup`, {
       method: "POST",
@@ -10,11 +12,12 @@ export const signUp = async (email: string, password: string) => {
       body: JSON.stringify({ email, password }),
     });
 
-    const data = await response.json();
-    return data;
+    data = await response.json();
   } catch (error) {
     console.error("Error signing up:", error);
-    return null;
+    error = error;
+  } finally {
+    return { data, error };
   }
 };
 

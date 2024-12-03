@@ -7,7 +7,7 @@ export default function Navigation() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="text-green-500 font-semibold text-xl">
-              YourApp
+              SupaAuth
             </Link>
 
             <div className="hidden md:block">
@@ -19,10 +19,10 @@ export default function Navigation() {
                   Dashboard
                 </Link>
                 <Link
-                  href="/profile"
+                  href="/protected-page"
                   className="text-gray-300 hover:text-green-500 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
-                  Profile
+                  Protected Page
                 </Link>
               </div>
             </div>

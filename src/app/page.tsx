@@ -25,7 +25,17 @@ export default function AuthPage() {
 
       console.log("user", user);
     } else if (activeTab === "signup") {
-      await signUp(email, password);
+      const { data, error } = await signUp(email, password);
+
+      if (error) {
+        toast.error(error);
+      }
+
+      if (data) {
+        toast.success(
+          "Sign up successful, Please check your email for confirmation link"
+        );
+      }
     }
   };
 
