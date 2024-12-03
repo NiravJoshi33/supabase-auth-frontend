@@ -11,7 +11,7 @@ export default function AuthPage() {
   const [activeTab, setActiveTab] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { error: userError, loading: userLoading, user, fetchUser } = useUser();
+  const { user, fetchUser } = useUser();
 
   useEffect(() => {
     fetchUser();

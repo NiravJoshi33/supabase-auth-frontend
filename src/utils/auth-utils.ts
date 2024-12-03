@@ -1,8 +1,8 @@
 import { BACKEND_URL } from "./env-vars";
 
 export const signUp = async (email: string, password: string) => {
-  let data: any = null;
-  let error = null;
+  let data = null;
+  const error = null;
   try {
     const response = await fetch(`${BACKEND_URL}/auth/signup`, {
       method: "POST",
@@ -22,7 +22,7 @@ export const signUp = async (email: string, password: string) => {
 };
 
 export const login = async (email: string, password: string) => {
-  let error = null;
+  const error = null;
   let user = null;
   try {
     const response = await fetch(`${BACKEND_URL}/auth/login`, {
@@ -49,7 +49,7 @@ export const login = async (email: string, password: string) => {
 };
 
 export const logout = async () => {
-  let error: any = null;
+  const error = null;
   let data = null;
 
   try {

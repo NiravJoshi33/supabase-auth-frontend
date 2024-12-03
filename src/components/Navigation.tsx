@@ -10,7 +10,7 @@ export default function Navigation() {
     const { data, error } = await logout();
     if (error) {
       console.error("Error logging out:", error);
-      toast.error(error.response?.data?.message || error.message);
+      toast.error((error as Error).message);
     }
 
     if (data) {
