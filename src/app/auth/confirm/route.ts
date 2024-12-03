@@ -1,6 +1,6 @@
 import { BACKEND_URL } from "@/utils/env-vars";
 import { redirect } from "next/navigation";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 export const GET = async (req: NextRequest) => {
   const url = new URL(req.url);
