@@ -1,9 +1,33 @@
 "use client";
+import { login, signUp } from "@/utils/auth-utils";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function AuthPage() {
   const [activeTab, setActiveTab] = useState<"login" | "signup">("login");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (activeTab === "login") {
+      const { user, error } = await login(email, password);
+      if (error) {
+        toast.error(error);
+      }
+
+      if (user) {
+        toast.success("Login successful");
+        redirect("/dashboard");
+      }
+
+      console.log("user", user);
+    } else if (activeTab === "signup") {
+      await signUp(email, password);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4">
@@ -47,7 +71,7 @@ export default function AuthPage() {
         </div>
 
         {/* Form */}
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
               Email
@@ -56,6 +80,8 @@ export default function AuthPage() {
               type="email"
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent"
               placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div>
@@ -66,6 +92,8 @@ export default function AuthPage() {
               type="password"
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent"
               placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
